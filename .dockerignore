@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log*
+.env
+.env.local
+uploads
+logs
+.nodemon_out
+.DS_Store
+test-local.js
+test-endpoints.bat
+*.md
+.github/
+.vscode/
+.git/

@@ -1,0 +1,512 @@
+:root {
+    --primary-color: rgb(201, 6, 6);
+    --secondary-color: #2d468b;
+    --accent-color: rgba(35, 1, 116);
+    --background-color: rgb(137, 168, 245);
+    --font-color: #ffffff;
+    --secondary-font-color: #ff6363;
+    --border-radius: 8px;
+    --box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 1);
+    --transition: var(--box-shadow) 1s;
+}
+
+header {
+
+    background-color: var(--primary-color);
+    color: var(--background-color);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100px;
+    
+    padding: 0 20px;
+    width: 100%;
+
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--box-shadow);
+}  
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* controls how close the text is to the logo */
+}
+
+
+header img {
+    width: 85px;
+    height: 85px;
+    margin: 0; /* remove extra spacing */
+}
+
+
+
+header h1 a {
+     font-weight: 600;
+     font-size: 35px;
+     text-decoration: none;
+     color: #fff;
+     display: flex;
+     text-align: left;
+}
+
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin: 0 15px;
+    display: flex;
+}
+
+header li a {
+    color: var(--font-color);
+    text-decoration: none;
+    font-weight: 400;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+header nav a:hover {
+    background-color: var(--background-color);
+    color: #000000;
+}
+
+/* Search bar styles */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  background-color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 8px 15px;
+  width: 250px; /* Adjust size as needed */
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero {
+    min-height: calc(100vh - 170px);
+    background: linear-gradient(rgba(255, 255, 255, 0.9)), url('Magister Portal Logo.jpg'), no-repeat center center/cover;
+    color: var(--font-color);
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    font-family: verdana;
+}
+
+.hero h1 a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.hero h1 a:hover {
+    background-color: var(--accent-color);
+    transition: var(--transition);
+    color: var(--font-color);
+}
+
+
+.hero p {
+     font-size: 18px;
+     margin-bottom: 30px;
+     font-weight: 600;
+     color: var(--accent-color);
+}
+
+     
+body {
+    font-family: verdana;
+    line-height: 1.6;
+    color: var(--secondary-color);
+    background-color: var(--background-color);
+    min-height: 100vh;
+    margin: 0;
+
+    padding-top: 100px;   /* header height */
+    padding-bottom: 70px; /* footer height */
+}
+
+footer {
+    background-color: var(--accent-color);
+    height: 70px;
+    width: 100%;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
+}
+
+.footer-socials ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-socials a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.footer-socials a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+
+
+
+.about {
+    min-height: calc(100vh - 170px);
+    background: linear-gradient(rgba(255, 255, 255, 0.9)), url('thinker-original.jpg'), no-repeat center center/cover;
+    color: var(--accent-color);
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    font-family: verdana;
+}
+
+.about h1 {
+    margin-top: 150px;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 35px;
+}
+
+.about p {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.about p a {
+    text-decoration: underline;
+    color: var(--accent-color);
+}
+
+.contact {
+    min-height: calc(100vh - 170px);
+     background: linear-gradient(rgba(255, 255, 255, 0.9)), url('thinker-original.jpg'), no-repeat center center/cover;
+    color: var(--accent-color);
+    display: flex;
+    padding: 20px;
+    font-family: verdana;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 600;
+}
+
+.contact h2 {
+    margin-bottom: 30px;
+    font-size: 25px;
+    margin-top: 150px;
+}
+
+form label {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    font-size: 20px;
+    border-radius: var(--border-radius);
+    text-align: left;
+}
+
+button[type="submit"] {
+    background-color: #a33636;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--accent-color);
+}
+
+.contact p {
+    font-size: 18px;
+}
+
+
+.login {
+    min-height: calc(100vh - 170px);
+     background: linear-gradient(rgba(255, 255, 255, 0.9)), url('thinker-original.jpg'), no-repeat center center/cover;
+    color: var(--accent-color);
+    display: flex;
+    padding: 20px;
+    font-family: verdana;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.login h2 {
+    margin-bottom: 30px;
+    font-size: 25px;
+    margin-top: 150px;
+}
+
+form label {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+form input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    font-size: 20px;
+    border-radius: var(--border-radius);
+    text-align: left;
+}
+
+form p a {
+    color: var(--accent-color);
+}
+
+form p a:hover {
+    background-color: var(--background-color);
+    color: var(--font-color);
+    padding: 7px 4px;
+    border: none;
+    border-radius: var(--border-radius);
+}
+
+button[type="submit"] {
+    background-color: #960000;
+    color: #fff;
+    padding: 7px 30px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--accent-color);
+}
+
+
+.signup {
+    min-height: calc(100vh - 170px);
+    background: linear-gradient(rgba(255, 255, 255, 0.9)), url('thinker-original.jpg'), no-repeat center center/cover;
+    color: var(--accent-color);
+    display: flex;
+    padding: 20px;
+    font-family: verdana;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.signup h2 {
+    margin-bottom: 30px;
+    font-size: 25px;
+    margin-top: 150px;
+}
+
+form label {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+form input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    font-size: 20px;
+    border-radius: var(--border-radius);
+    text-align: left;
+}
+
+button[type="submit"] {
+    background-color: #960000;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.create-post {
+    min-height: calc(100vh - 170px);
+    background: linear-gradient(rgba(255, 255, 255, 0.3)), url('thinker-original.jpg'), no-repeat center center/cover;
+    color: #000000;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: verdana;
+    padding: 60px 0;
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+    font-weight: 600;
+}
+
+
+.post {
+    color: #000000;
+  background: #fff;
+  padding: 15px;
+  margin: 15px auto;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.create-post textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.post img,
+.post video {
+  max-width: 100%;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .header-left {
+        margin-bottom: 10px;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    header nav ul li {
+        margin: 5px 0;
+    }
+
+    .header-right {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .hero h1 a,
+    .about h1 {
+        font-size: 24px;
+    }
+
+    .hero p,
+    .about p {
+        font-size: 16px;
+    }
+
+    form {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .contact,
+    .login,
+    .signup {
+        padding: 20px 10px;
+    }
+
+    footer {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .footer-socials ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header img {
+        width: 60px;
+        height: 60px;
+    }
+
+    header h1 a {
+        font-size: 24px;
+    }
+
+    .hero h1 a,
+    .about h1 {
+        font-size: 20px;
+    }
+
+    .contact h2,
+    .login h2,
+    .signup h2 {
+        font-size: 20px;
+        margin-top: 100px;
+    }
+}
+
+
