@@ -1,6 +1,6 @@
 // API Configuration
 // Use relative path (let web server proxy) for both development and production
-const API_URL = '/api';
+const API_URL = 'https://magister-portal-backend.onrender.com/api';
 
 // Contact form handler
 const contactForm = document.getElementById("contactForm");
