@@ -1,58 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>
-            Home Page - Magister Portal
-        </title>
-        <meta charset="UTF-8">
-        <meta name="description" content="Let's marvel together">
-        <meta name="keywords" content="Science, Philosophy, Spirituality, News, Art, Music, Education, Business">
-        <meta name="author" content="Kabanda Ivan">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="robots" content="index, follow">
-        <link rel="canonical" href="https://www.magisterportal.com">
-        <link rel="stylesheet" href="MagisterPortal.css">
-        <script src="MagisterPortal.js" defer></script>
-    </head>
-    <body>
-        <header>
-            <div class="header-left">
-                <img src="Magister Portal Logo.jpg" alt="Magister Portal Logo">
-                <h1><a href="MagisterPortal.html">Magister Portal</a></h1>
-            </div>
-            <nav> 
-                <ul>
-                    <li><a href="MagisterPortal.html">Home</a></li>
-                    <li><a href="Blog.html">Blog</a></li>
-                    <li><a href="About.html">About</a></li>
-                    <li><a href="Contact.html">Contact</a></li>
-                    <li><a href="Login.html">Login</a></li>
-                </ul>
-            </nav>
-             <div class="header-right">
-                <input type="text" class="search-bar" placeholder="Search..." />
-            </div>
-        </header>
-        <section class="content hero">
-            <h1><a href="Blog.html" target="_blank">Welcome, Fam! Let's Explore Together</a></h1>
-            <p style="text-align: left;">
-                Experience the predicament of a relentlessly inquisitive person continuosly learning and yearning to share his analyses of well researched facts that will make you ponder, wonder, do better, be better and inspire.
-                Magister Portal is a page for not only winning well reasoned small-talk arguments but especially for academic and pragmatic approaches toward life.
-            </p>
-        </section>
-        <footer>
+<head>
+    <meta charset="UTF-8">
+    <title>Home – Magister Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="MagisterPortal.css">
+
+    <!-- Main JS (auth + logic) -->
+    <script src="MagisterPortal.js" defer></script>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+    <div class="logo">
+        <img src="Magister Portal Logo.jpg" alt="Magister Portal Logo">
+        <span>Magister Portal</span>
+    </div>
+
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="Blog.html">Blog</a>
+        <a href="About.html">About</a>
+        <a href="Contact.html">Contact</a>
+        <a href="Login.html" id="loginLink">Login</a>
+        <a href="#" id="logoutLink" style="display:none;">Logout</a>
+    </nav>
+
+    <input type="search" placeholder="Search...">
+</header>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main class="content">
+
+    <section class="hero">
+        <h1>Welcome to <span class="highlight">Magister Portal</span></h1>
+        <p class="subtitle">
+            A digital space for knowledge, philosophy, science, spirituality, and critical thought.
+        </p>
+
+        <div class="cta-buttons">
+            <a href="SignUp.html" class="btn primary">Join the Community</a>
+            <a href="Blog.html" class="btn secondary">Explore Blog</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>📚 Deep Knowledge</h3>
             <p>
-                © 2025 Magister Portal. All rights reserved.
-            </p>   
-          <nav class="footer-socials">
-                <ul>
-                    <li><a href="https://www.facebook.com/profile.php?id=61585166609921" target="_blank">Facebook</a></li>
-                    <li><a href="#" target="_blank">X [Twitter]</a></li>
-                    <li><a href="#" target="_blank">TikTok</a></li>
-                    <li><a href="#" target="_blank">WhatsApp</a></li>
-                    <li><a href="#" target="_blank">Instagram</a></li>
-                </ul>
-            </nav>
-        </footer>
-    </body>
+                Carefully researched articles supported by scholarly sources, media, and real-world context.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🧠 Critical Thinking</h3>
+            <p>
+                Challenge assumptions, bust myths, and explore ideas beyond surface-level narratives.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🌍 Community</h3>
+            <p>
+                Join a respectful community of learners, thinkers, and professionals from diverse fields.
+            </p>
+        </div>
+    </section>
+
+    <section class="auth-info" id="authMessage" style="display:none;">
+        <p>
+            You are logged in.  
+            Access exclusive features such as commenting, reacting to posts, and account personalization.
+        </p>
+    </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <p>© 2025 Magister Portal. All rights reserved.</p>
+    <div class="social-links">
+        <a href="#">Facebook</a>
+        <a href="#">X [Twitter]</a>
+        <a href="#">TikTok</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">Instagram</a>
+    </div>
+</footer>
+
+</body>
 </html>

@@ -1,75 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Blog – Magister Portal</title>
-
+    <title>About - Magister Portal</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Let's marvel together">
-    <meta name="keywords" content="Science, Philosophy, Spirituality, News, Art, Music, Education, Business">
+    <meta name="description" content="Magister Portal Blog">
+    <meta name="keywords" content="Science, Philosophy, Spirituality, Education">
     <meta name="author" content="Kabanda Ivan">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index, follow">
-
-    <link rel="canonical" href="https://www.magisterportal.com">
     <link rel="stylesheet" href="MagisterPortal.css">
     <script src="MagisterPortal.js" defer></script>
 </head>
 
-<body>
+<body data-protected="true">
 
+
+<!-- ================= HEADER ================= -->
 <header>
     <div class="header-left">
         <img src="Magister Portal Logo.jpg" alt="Magister Portal Logo">
-        <h1><a href="MagisterPortal.html">Magister Portal</a></h1>
+        <h1><a href="index.html">Magister Portal</a></h1>
     </div>
 
     <nav>
         <ul>
-            <li><a href="MagisterPortal.html">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="Blog.html">Blog</a></li>
             <li><a href="About.html">About</a></li>
             <li><a href="Contact.html">Contact</a></li>
-            <li><a href="Login.html">Login</a></li>
+            <li><a href="Login.html" id="loginLink">Login</a></li>
+            <li><a href="#" id="logoutLink" style="display:none;" onclick="logout()">Logout</a></li>
         </ul>
     </nav>
 
-    <div class="header-right">
-        <input type="text" class="search-bar" placeholder="Search...">
-    </div>
+    <input type="text" class="search-bar" placeholder="Search...">
 </header>
 
-<section class="create-post">
-  <h2>Create a Post</h2>
+<!-- ================= MAIN CONTENT ================= -->
+<main class="content">
 
-  <form id="postForm">
-    <textarea
-      id="postText"
-      placeholder="What's on your mind?"
-      rows="4"
-      required
-    ></textarea>
+    <h2>Blog</h2>
 
-    <input type="file" id="postMedia" accept="image/*,video/*" />
+    <!-- ADMIN ONLY -->
+    <div id="adminControls" class="admin-only">
+        <a href="create-post.html">
+            <button>Create New Post</button>
+        </a>
+    </div>
 
-    <button type="submit">Post</button>
-  </form>
-</section>
+    <!-- POSTS -->
+    <section class="posts" id="postsContainer"></section>
 
-<section class="posts" id="postsContainer"></section>
+</main>
 
-
+<!-- ================= FOOTER ================= -->
 <footer>
     <p>© 2025 Magister Portal. All rights reserved.</p>
-
-    <nav class="footer-socials">
+    <div class="footer-socials">
         <ul>
-            <li><a href="https://www.facebook.com/profile.php?id=61585166609921" target="_blank">Facebook</a></li>
-            <li><a href="#" target="_blank">X (Twitter)</a></li>
-            <li><a href="#" target="_blank">TikTok</a></li>
-            <li><a href="#" target="_blank">WhatsApp</a></li>
-            <li><a href="#" target="_blank">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">X [Twitter]</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">WhatsApp</a></li>
+            <li><a href="#">Instagram</a></li>
         </ul>
-    </nav>
+    </div>
 </footer>
 
 </body>
