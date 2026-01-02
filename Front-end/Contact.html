@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>About - Magister Portal</title>
+    <title>Contact – Magister Portal</title>
     <meta charset="UTF-8">
     <meta name="description" content="Magister Portal Blog">
     <meta name="keywords" content="Science, Philosophy, Spirituality, Education">
@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy"
       content="default-src 'self' https://magister-portal-backend.onrender.com">
-    <link rel="stylesheet" href="MagisterPortal.css">
-    <script src="MagisterPortal.js" defer></script>
+    <link rel="stylesheet" href="./MagisterPortal.css">
+    <script src="../MagisterPortal.js" defer></script>
 </head>
 <body>
 
@@ -21,13 +21,14 @@
         <h1><a href="index.html">Magister Portal</a></h1>
     </div>
 
-    <nav>
+    <nav aria-label="Primary" role="navigation">
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="Blog.html">Blog</a></li>
             <li><a href="About.html">About</a></li>
-            <li><a href="Contact.html">Contact</a></li>
+            <li><a href="Contact.html" aria-current="page">Contact</a></li>
             <li><a href="Login.html" id="loginLink">Login</a></li>
+            <li><a href="#" id="logoutLink" style="display:none">Logout</a></li>
         </ul>
     </nav>
 
@@ -38,18 +39,18 @@
 <main class="content">
     <h2>Contact</h2>
 
-    <form id="contactForm">
-        <label>Name</label>
-        <input type="text" required>
+    <form id="contactForm" novalidate>
+        <label for="contactName">Name</label>
+        <input id="contactName" name="name" type="text" required minlength="2" maxlength="100">
 
-        <label>Email</label>
-        <input type="email" required>
+        <label for="contactEmail">Email</label>
+        <input id="contactEmail" name="email" type="email" required>
 
-        <label>Message</label>
-        <textarea rows="5" required></textarea>
+        <label for="contactMessage">Message</label>
+        <textarea id="contactMessage" name="message" rows="5" required minlength="5" maxlength="5000"></textarea>
 
         <button type="submit">Send Message</button>
-        <p id="formStatus"></p>
+        <p id="formStatus" role="status" aria-live="polite"></p>
     </form>
 </main>
 

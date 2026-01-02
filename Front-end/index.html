@@ -1,23 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self' https://magister-portal-backend.onrender.com">
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Magister Portal" />
   <title>Magister Portal</title>
-
-  <!-- Instant redirect -->
-  <meta http-equiv="refresh" content="0; url=Login.html" />
-
-  <!-- Fallback for browsers that block meta refresh -->
-  <script>
-    window.location.href = "Login.html";
-  </script>
+  <link rel="stylesheet" href="./MagisterPortal.css">
+  <script src="../MagisterPortal.js" defer></script>
 </head>
-<body>
-  <p>
-    Redirecting to login page…
-    <a href="Login.html">Click here if you are not redirected</a>
-  </p>
+<body data-protected="false">
+
+<header>
+  <div class="header-left">
+    <img src="assets/Magister Portal Logo.jpg" alt="Magister Portal Logo">
+    <h1><a href="index.html">Magister Portal</a></h1>
+  </div>
+  <nav aria-label="Primary" role="navigation">
+    <ul>
+      <li><a href="index.html" aria-current="page">Home</a></li>
+      <li><a href="Blog.html">Blog</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+      <li><a href="Login.html" id="loginLink">Login</a></li>
+      <li><a href="#" id="logoutLink" style="display:none">Logout</a></li>
+    </ul>
+  </nav>
+  <input type="text" class="search-bar" placeholder="Search...">
+</header>
+
+<main class="content">
+  <section class="content-card">
+    <h2>Welcome to Magister Portal</h2>
+    <p>
+      Explore thoughtful content across science, philosophy, spirituality, arts, music, education,
+      business, and critical analysis of events. Join a community of lifelong learners and thinkers.
+    </p>
+    <p>
+      Visit the <a href="Blog.html">Blog</a> to get started, or <a href="Login.html">Login</a> / <a href="SignUp.html">Create an account</a>.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Magister Portal. All rights reserved.</p>
+  <div class="footer-socials">
+    <ul>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">X [Twitter]</a></li>
+      <li><a href="#">TikTok</a></li>
+      <li><a href="#">WhatsApp</a></li>
+      <li><a href="#">Instagram</a></li>
+    </ul>
+  </div>
+</footer>
+
 </body>
 </html>

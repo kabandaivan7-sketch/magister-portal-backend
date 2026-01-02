@@ -7,7 +7,11 @@ const API_URL = "https://magister-portal-backend.onrender.com/api";
    AUTH STATE
 ================================ */
 function getUser() {
-  return JSON.parse(localStorage.getItem("magisterUser"));
+  try {
+    return JSON.parse(localStorage.getItem("magisterUser"));
+  } catch (_) {
+    return null;
+  }
 }
 
 function getToken() {
@@ -31,14 +35,33 @@ document.addEventListener("DOMContentLoaded", () => {
   setupAuthUI();
   setupForms();
   loadPosts();
+
+  // Admin bootstrap
+  if (isAdmin()) {
+    const createBtn = document.getElementById("createPostBtn");
+    createBtn && createBtn.addEventListener("click", createPost);
+    loadAdminPosts();
+  }
+
+  // Toggle admin-only sections consistently
+  document.querySelectorAll(".admin-only").forEach(el => {
+    el.style.display = isAdmin() ? "block" : "none";
+  });
 });
 
 /* ===============================
    PAGE PROTECTION
 ================================ */
 function protectPage() {
-  if (document.body.dataset.protected === "true" && !isLoggedIn()) {
+  const isProtected = document.body.dataset.protected === "true";
+  if (isProtected && !isLoggedIn()) {
     window.location.href = "Login.html";
+    return;
+  }
+  const isAdminPage = location.pathname.toLowerCase().endsWith("/admin.html");
+  if (isAdminPage && !isAdmin()) {
+    alert("Access denied. Admins only.");
+    window.location.href = "index.html";
   }
 }
 
@@ -54,14 +77,15 @@ function setupAuthUI() {
     logoutLink && (logoutLink.style.display = "inline");
   } else {
     logoutLink && (logoutLink.style.display = "none");
+    loginLink && (loginLink.style.display = "inline");
   }
 
   if (isAdmin()) {
-    document.querySelectorAll(".admin-only")
-      .forEach(el => el.style.display = "block");
+    document.querySelectorAll(".admin-only").forEach(el => (el.style.display = "block"));
   }
 
-  logoutLink?.addEventListener("click", () => {
+  logoutLink?.addEventListener("click", (e) => {
+    e.preventDefault();
     localStorage.clear();
     window.location.href = "Login.html";
   });
@@ -73,9 +97,13 @@ function setupAuthUI() {
 function setupForms() {
   const loginForm = document.getElementById("loginForm");
   const signupForm = document.getElementById("signupForm");
+  const contactForm = document.getElementById("contactForm");
+  const recoveryForm = document.getElementById("recoveryForm");
 
   loginForm && loginForm.addEventListener("submit", handleLogin);
   signupForm && signupForm.addEventListener("submit", handleSignup);
+  contactForm && contactForm.addEventListener("submit", handleContactSubmit);
+  recoveryForm && recoveryForm.addEventListener("submit", handleRecoverySubmit);
 }
 
 /* ===============================
@@ -99,7 +127,7 @@ async function handleLogin(e) {
     });
 
     const data = await res.json();
-    if (!res.ok) throw data.message;
+    if (!res.ok) throw data.message || "Login failed";
 
     localStorage.setItem("magisterUser", JSON.stringify(data.user));
     localStorage.setItem("magisterToken", data.token);
@@ -139,7 +167,7 @@ async function handleSignup(e) {
     });
 
     const data = await res.json();
-    if (!res.ok) throw data.message;
+    if (!res.ok) throw data.message || "Signup failed";
 
     status.textContent = "Account created. Redirecting...";
     status.style.color = "green";
@@ -152,42 +180,146 @@ async function handleSignup(e) {
 }
 
 /* ===============================
+   CONTACT & RECOVERY FORMS
+================================ */
+async function handleContactSubmit(e) {
+  e.preventDefault();
+  const status = document.getElementById("formStatus");
+  const name = (document.getElementById("contactName")?.value || "").trim();
+  const email = (document.getElementById("contactEmail")?.value || "").trim();
+  const message = (document.getElementById("contactMessage")?.value || "").trim();
+
+  if (!name || !email || !message) {
+    if (status) {
+      status.textContent = "Please fill in all fields.";
+      status.style.color = "red";
+    }
+    return;
+  }
+
+  if (status) {
+    status.textContent = "Sending...";
+    status.style.color = "blue";
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/contact`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message })
+    });
+    const data = await res.json();
+    if (!res.ok) throw data.message || "Failed to send message.";
+
+    if (status) {
+      status.textContent = data.message || "Message sent!";
+      status.style.color = "green";
+    }
+  } catch (err) {
+    if (status) {
+      status.textContent = err;
+      status.style.color = "red";
+    }
+  }
+}
+
+async function handleRecoverySubmit(e) {
+  e.preventDefault();
+  const status = document.getElementById("recoveryStatus");
+  const emailInput = document.getElementById("recoveryEmail") || document.getElementById("email");
+  const email = (emailInput?.value || "").trim();
+
+  if (!email) {
+    if (status) {
+      status.textContent = "Please enter your email address.";
+      status.style.color = "red";
+    }
+    return;
+  }
+
+  if (status) {
+    status.textContent = "Sending recovery email...";
+    status.style.color = "blue";
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/recovery`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (!res.ok) throw data.message || "Failed to send recovery email.";
+
+    if (status) {
+      status.textContent = data.message || "If an account exists, a recovery email was sent.";
+      status.style.color = "green";
+    }
+  } catch (err) {
+    if (status) {
+      status.textContent = err;
+      status.style.color = "red";
+    }
+  }
+}
+
+/* ===============================
    BLOG POSTS
 ================================ */
 async function loadPosts() {
   const container = document.getElementById("postsContainer");
   if (!container) return;
 
-  const res = await fetch(`${API_URL}/posts`);
-  const posts = await res.json();
+  try {
+    const res = await fetch(`${API_URL}/posts`);
+    const posts = await res.json();
 
-  container.innerHTML = "";
+    container.innerHTML = "";
 
-  posts.forEach(post => {
-    container.innerHTML += renderPost(post);
-  });
+    posts.forEach(post => {
+      container.innerHTML += renderPost(post);
+    });
 
-  disableGuestActions();
+    disableGuestActions();
+  } catch (_) {
+    container.innerHTML = "<p>Failed to load posts.</p>";
+  }
 }
 
 /* ===============================
-   RENDER POST
+   RENDER POST (escaped)
 ================================ */
+function escapeHTML(str) {
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function renderPost(post) {
+  const text = escapeHTML(post.text || "");
+  const likes = post.likes || 0;
+  const loves = post.loves || 0;
+  const comments = (post.comments || [])
+    .map(c => `<p>${escapeHTML(c.text)}</p>`)
+    .join("");
+
   return `
     <div class="post">
-      <p>${post.text}</p>
+      <p>${text}</p>
 
       <div class="reactions">
         <button onclick="reactPost('${post._id}','like')">👍</button>
-        <span>${post.likes || 0}</span>
+        <span>${likes}</span>
 
         <button onclick="reactPost('${post._id}','love')">❤️</button>
-        <span>${post.loves || 0}</span>
+        <span>${loves}</span>
       </div>
 
       <div class="comments">
-        ${(post.comments || []).map(c => `<p>${c.text}</p>`).join("")}
+        ${comments}
       </div>
 
       <input
@@ -243,24 +375,11 @@ async function submitComment(e, postId) {
 function disableGuestActions() {
   if (isLoggedIn()) return;
 
-  document.querySelectorAll(".comment-input")
-    .forEach(i => i.disabled = true);
+  document.querySelectorAll(".comment-input").forEach(i => (i.disabled = true));
 }
 
 /* ===============================
    ADMIN DASHBOARD
-================================ */
-document.addEventListener("DOMContentLoaded", () => {
-  if (!isAdmin()) return;
-
-  const createBtn = document.getElementById("createPostBtn");
-  createBtn && createBtn.addEventListener("click", createPost);
-
-  loadAdminPosts();
-});
-
-/* ===============================
-   CREATE POST (ADMIN)
 ================================ */
 async function createPost() {
   const text = document.getElementById("postText").value.trim();
@@ -299,27 +418,27 @@ async function createPost() {
   }
 }
 
-/* ===============================
-   LOAD POSTS (ADMIN VIEW)
-================================ */
 async function loadAdminPosts() {
   const container = document.getElementById("adminPosts");
   if (!container) return;
 
-  const res = await fetch(`${API_URL}/posts`);
-  const posts = await res.json();
+  try {
+    const res = await fetch(`${API_URL}/posts`);
+    const posts = await res.json();
 
-  container.innerHTML = posts.map(post => `
+    container.innerHTML = posts
+      .map(post => `
     <div class="post admin-post">
-      <p>${post.text}</p>
+      <p>${escapeHTML(post.text)}</p>
       <button onclick="deletePost('${post._id}')">Delete</button>
     </div>
-  `).join("");
+  `)
+      .join("");
+  } catch (_) {
+    container.innerHTML = "<p>Failed to load posts.</p>";
+  }
 }
 
-/* ===============================
-   DELETE POST (ADMIN)
-================================ */
 async function deletePost(postId) {
   if (!confirm("Delete this post?")) return;
 
@@ -335,54 +454,39 @@ async function deletePost(postId) {
 }
 
 /* ================================
-   AUTH & ROUTE PROTECTION
+   AUTH & ROUTE PROTECTION HELPERS
 ================================ */
-
 function getAuth() {
+  const user = getUser();
   return {
-    token: localStorage.getItem("token"),
-    role: localStorage.getItem("userRole"),
+    token: getToken(),
+    role: user ? user.role : undefined,
   };
 }
 
 function requireLogin() {
-  const { token } = getAuth();
-  if (!token) {
+  if (!isLoggedIn()) {
     alert("You must be logged in.");
     window.location.href = "Login.html";
   }
 }
 
 function requireAdmin() {
-  const { token, role } = getAuth();
-
-  if (!token) {
+  if (!isLoggedIn()) {
     alert("Please login first.");
     window.location.href = "Login.html";
     return;
   }
 
-  if (role !== "admin") {
+  if (!isAdmin()) {
     alert("Access denied. Admins only.");
     window.location.href = "index.html";
   }
 }
 
 function requireUser() {
-  const { token } = getAuth();
-
-  if (!token) {
+  if (!isLoggedIn()) {
     alert("Please login to interact.");
     window.location.href = "Login.html";
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const { role } = getAuth();
-
-  document.querySelectorAll(".admin-only").forEach(el => {
-    if (role !== "admin") {
-      el.style.display = "none";
-    }
-  });
-});

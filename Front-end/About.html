@@ -10,8 +10,8 @@
     <meta http-equiv="Content-Security-Policy"
       content="default-src 'self' https://magister-portal-backend.onrender.com">
 
-    <link rel="stylesheet" href="MagisterPortal.css">
-    <script src="MagisterPortal.js" defer></script>
+    <link rel="stylesheet" href="./MagisterPortal.css">
+    <script src="../MagisterPortal.js" defer></script>
 </head>
 
 <body data-protected="false">
@@ -20,28 +20,28 @@
 <div class="page-wrapper">
 
     <!-- ================= HEADER ================= -->
-    <header>
+    <header role="banner">
         <div class="header-left">
            <img src="assets/Magister Portal Logo.jpg" alt="Magister Portal Logo">
             <h1><a href="index.html">Magister Portal</a></h1>
         </div>
 
-        <nav>
+        <nav aria-label="Primary" role="navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="Blog.html">Blog</a></li>
-                <li><a href="About.html" class="active">About</a></li>
+                <li><a href="About.html" aria-current="page">About</a></li>
                 <li><a href="Contact.html">Contact</a></li>
                 <li><a href="Login.html" id="loginLink">Login</a></li>
-                </li>
+                <li><a href="#" id="logoutLink" style="display:none">Logout</a></li>
             </ul>
         </nav>
 
-        <input type="text" class="search-bar" placeholder="Search...">
+        <input type="text" class="search-bar" placeholder="Search..." aria-label="Search">
     </header>
 
     <!-- ================= MAIN CONTENT ================= -->
-    <main class="content centered-content">
+    <main class="content centered-content" role="main">
 
         <section class="content-card">
             <h2>About Magister Portal</h2>
@@ -79,7 +79,7 @@
     </main>
 
     <!-- ================= FOOTER ================= -->
-    <footer>
+    <footer role="contentinfo">
         <p>© 2025 Magister Portal. All rights reserved.</p>
 
         <div class="footer-socials">

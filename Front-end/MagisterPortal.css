@@ -13,6 +13,13 @@
     --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     --transition: 0.3s ease;
     --text-dark: #222;
+
+    /* Fluid typography scale */
+    --fs-base: clamp(14px, 0.85rem + 0.25vw, 18px);
+    --fs-sm: clamp(12px, 0.75rem + 0.2vw, 16px);
+    --fs-h1: clamp(24px, 1.2rem + 2.2vw, 42px);
+    --fs-h2: clamp(20px, 1rem + 1.4vw, 32px);
+    --fs-h3: clamp(18px, 0.9rem + 1vw, 24px);
 }
 
 /* =========================
@@ -28,14 +35,25 @@ html, body {
     height: 100%;
 }
 
-.page-wrapper {
-    min-height: 100vh;
+/* Sticky footer layout: body as flex container */
+body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
+/* Optional wrapper if pages include it */
+.page-wrapper,
 .content-wrapper {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+
+main,
+.content,
+.container {
+    flex: 1 0 auto;
 }
 
 body {
@@ -47,6 +65,8 @@ body {
     background-attachment: fixed;
     color: white;
     font-weight: 500;
+    font-size: var(--fs-base);
+    line-height: 1.6;
 }
 
 
@@ -59,6 +79,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 16px;
     padding: 10px 20px;
     box-shadow: var(--box-shadow);
 }
@@ -89,6 +111,7 @@ nav a {
     text-decoration: none;
     font-weight: bold;
     transition: var(--transition);
+    outline: none;
 }
 
 nav a:hover {
@@ -97,8 +120,18 @@ nav a:hover {
     padding: 2px 3px;
     border-radius: var(--border-radius);
 }
+nav a:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+}
 
 .header-right input {
+    padding: 6px 10px;
+    border-radius: var(--border-radius);
+    border: none;
+}
+.search-bar {
+    width: clamp(180px, 30vw, 280px);
     padding: 6px 10px;
     border-radius: var(--border-radius);
     border: none;
@@ -116,13 +149,24 @@ nav a:hover {
     box-shadow: var(--box-shadow);
     line-height: 1.6;
 }
+.content .actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
 .content h2 {
     color: white;
     margin-bottom: 15px;
-    font-size: 25px;
+    font-size: var(--fs-h2);
     font-weight: bold;
 }
+/* Global fluid type */
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+p, nav a, label, small { font-size: var(--fs-base); }
+button { font-size: var(--fs-base); }
 
 /* =========================
    FORMS
@@ -139,10 +183,11 @@ label {
 
 input,
 textarea {
+    width: 100%;
     padding: 10px;
     border-radius: var(--border-radius);
     border: 1px solid #ccc;
-    font-size: 1rem;
+    font-size: var(--fs-base);
 }
 
 textarea {
@@ -195,7 +240,7 @@ button:active {
 /* =========================
    BLOG
 ========================= */
-.posts {
+.posts, #postsContainer {
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -206,6 +251,7 @@ button:active {
     padding: 20px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
+    color: var(--text-dark);
 }
 
 .post h3 {
@@ -234,6 +280,11 @@ button:active {
     color: var(--primary-color);
     padding: 6px 12px;
     transition: all 0.3s ease;
+}
+.reactions span {
+    min-width: 1.5rem;
+    display: inline-block;
+    text-align: center;
 }
 
 .reactions button:hover {
@@ -273,6 +324,7 @@ footer {
     color: var(--font-color);
     padding: 20px;
     text-align: center;
+    margin-top: auto; /* Push footer to bottom when content is short */
 }
 
 .footer-socials ul {
@@ -301,13 +353,31 @@ footer {
    RESPONSIVE
 ========================= */
 @media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
+
+    header {
+        align-items: flex-start;
+    }
+
+    .header-left,
+    nav {
+        width: 100%;
+    }
+
     nav ul {
         flex-direction: column;
         gap: 10px;
     }
 
+    .search-bar {
+        width: 100%;
+    }
+
     .content {
         margin: 20px;
+        padding: 20px;
     }
 }
 
@@ -325,6 +395,7 @@ footer {
   border: none;
   padding: 6px 12px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .admin-post button:hover {

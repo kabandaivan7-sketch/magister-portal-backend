@@ -2,49 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Admin Posts – Magister Portal</title>
-  <link rel="stylesheet" href="MagisterPortal.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Admin dashboard for managing Magister Portal posts." />
+  <title>Admin Dashboard – Magister Portal</title>
+  <link rel="stylesheet" href="./MagisterPortal.css" />
 </head>
 
 <body data-protected="true">
+  <header class="main-header" role="banner">
+    <h1>Magister Portal</h1>
+    <nav aria-label="Primary" role="navigation">
+      <a href="index.html">Home</a>
+      <a href="Blog.html">Blog</a>
+      <a href="admin.html" aria-current="page">Dashboard</a>
+      <a id="loginLink" href="Login.html">Login</a>
+      <a id="logoutLink" href="#" style="display:none">Logout</a>
+    </nav>
+  </header>
 
-<header class="main-header">
-  <h1>Magister Portal</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="Blog.html">Blog</a>
-    <a href="admin.html">Dashboard</a>
-    <a href="#" onclick="logout()">Logout</a>
-  </nav>
-</header>
+  <main class="container" role="main">
+    <noscript>
+      <div class="card" role="alert">This page requires JavaScript to function properly.</div>
+    </noscript>
 
-<main class="container">
-  <section class="card">
-    <h2>Create New Post</h2>
+    <!-- Admin-only sections are hidden by default and revealed by JS when the user is an admin -->
+    <section class="card admin-only" style="display:none">
+      <h2>Create New Post</h2>
 
-    <input type="text" id="postTitle" placeholder="Post title" />
+      <div class="form-group">
+        <label for="postText">Post content</label>
+        <textarea id="postText" name="postText" rows="10" placeholder="Write your article here..." required minlength="3" maxlength="5000" aria-describedby="postHelp"></textarea>
+        <small id="postHelp">Between 3 and 5000 characters.</small>
+      </div>
 
-    <textarea id="postContent" rows="10"
-      placeholder="Write your article here..."></textarea>
+      <div class="actions">
+        <button id="createPostBtn" type="button">Publish Post</button>
+        <span id="postStatus" role="status" aria-live="polite"></span>
+      </div>
+    </section>
 
-    <button onclick="createPost()">Publish Post</button>
-  </section>
+    <section class="card admin-only" style="display:none">
+      <h2>Existing Posts</h2>
+      <div id="adminPosts" aria-live="polite"></div>
+    </section>
+  </main>
 
-  <section class="card">
-    <h2>Existing Posts</h2>
-    <div id="adminPostsList"></div>
-  </section>
-</main>
+  <footer class="main-footer" role="contentinfo">
+    © 2025 Magister Portal
+  </footer>
 
-<footer class="main-footer">
-  © 2025 Magister Portal
-</footer>
-
-<script src="MagisterPortal.js"></script>
-<script>
-  requireAdmin();
-  loadAdminPosts();
-</script>
-
+  <!-- Use the shared app script from the project root -->
+  <script src="../MagisterPortal.js" defer></script>
 </body>
 </html>

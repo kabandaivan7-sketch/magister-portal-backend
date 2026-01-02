@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>About - Magister Portal</title>
+    <title>Blog – Magister Portal</title>
     <meta charset="UTF-8">
     <meta name="description" content="Magister Portal Blog">
     <meta name="keywords" content="Science, Philosophy, Spirituality, Education">
@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy"
       content="default-src 'self' https://magister-portal-backend.onrender.com">
-    <link rel="stylesheet" href="MagisterPortal.css">
-    <script src="MagisterPortal.js" defer></script>
+    <link rel="stylesheet" href="./MagisterPortal.css">
+    <script src="../MagisterPortal.js" defer></script>
 </head>
 
 <body data-protected="true">
@@ -23,13 +23,14 @@
         <h1><a href="index.html">Magister Portal</a></h1>
     </div>
 
-    <nav>
+    <nav aria-label="Primary" role="navigation">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="Blog.html">Blog</a></li>
+            <li><a href="Blog.html" aria-current="page">Blog</a></li>
             <li><a href="About.html">About</a></li>
             <li><a href="Contact.html">Contact</a></li>
             <li><a href="Login.html" id="loginLink">Login</a></li>
+            <li><a href="#" id="logoutLink" style="display:none">Logout</a></li>
         </ul>
     </nav>
 
@@ -43,7 +44,7 @@
     <h2>Blog</h2>
 
 <section class="admin-only" style="display:none;">
-  <a href="create-post.html">New Post</a>
+  <a href="admin.html">Dashboard</a>
 </section>
 
 <section id="postsContainer"></section>

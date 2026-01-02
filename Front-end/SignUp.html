@@ -10,10 +10,10 @@
     <meta http-equiv="Content-Security-Policy"
       content="default-src 'self' https://magister-portal-backend.onrender.com">
     <!-- Main CSS -->
-    <link rel="stylesheet" href="MagisterPortal.css">
+    <link rel="stylesheet" href="./MagisterPortal.css">
 
     <!-- Main JS -->
-    <script src="MagisterPortal.js" defer></script>
+    <script src="../MagisterPortal.js" defer></script>
 </head>
 <body>
 
@@ -24,13 +24,14 @@
         <h1><a href="index.html">Magister Portal</a></h1>
     </div>
 
-    <nav>
+    <nav aria-label="Primary" role="navigation">
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="Blog.html">Blog</a></li>
             <li><a href="About.html">About</a></li>
             <li><a href="Contact.html">Contact</a></li>
             <li><a href="Login.html" id="loginLink">Login</a></li>
+            <li><a href="#" id="logoutLink" style="display:none">Logout</a></li>
         </ul>
     </nav>
 
