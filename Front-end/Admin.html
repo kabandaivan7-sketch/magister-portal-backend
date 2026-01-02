@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Posts – Magister Portal</title>
+  <link rel="stylesheet" href="MagisterPortal.css" />
+</head>
+
+<body data-protected="true">
+
+<header class="main-header">
+  <h1>Magister Portal</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="Blog.html">Blog</a>
+    <a href="admin.html">Dashboard</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="card">
+    <h2>Create New Post</h2>
+
+    <input type="text" id="postTitle" placeholder="Post title" />
+
+    <textarea id="postContent" rows="10"
+      placeholder="Write your article here..."></textarea>
+
+    <button onclick="createPost()">Publish Post</button>
+  </section>
+
+  <section class="card">
+    <h2>Existing Posts</h2>
+    <div id="adminPostsList"></div>
+  </section>
+</main>
+
+<footer class="main-footer">
+  © 2025 Magister Portal
+</footer>
+
+<script src="MagisterPortal.js"></script>
+<script>
+  requireAdmin();
+  loadAdminPosts();
+</script>
+
+</body>
+</html>
