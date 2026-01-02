@@ -107,6 +107,28 @@ function setupForms() {
   recoveryForm && recoveryForm.addEventListener("submit", handleRecoverySubmit);
 }
 
+/* ===============================
+   PASSWORD TOGGLES
+================================ */
+function setupPasswordToggles() {
+  document.querySelectorAll(".toggle-password").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = btn.dataset.target;
+      const input = targetId ? document.getElementById(targetId) : btn.previousElementSibling;
+
+      if (input) {
+        const type = input.type === "password" ? "text" : "password";
+        input.type = type;
+
+        const icon = btn.querySelector("i") || btn;
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
+      }
+    });
+  });
+}
+
 /*
 
 /* ===============================
