@@ -44,7 +44,10 @@
         <input type="email" id="loginEmail" required>
 
         <label for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" required>
+        <div class="password-field">
+          <input type="password" id="loginPassword" required>
+          <button type="button" class="toggle-password" data-toggle="password" data-target="loginPassword">Show</button>
+        </div>
 
         <button type="submit">Login</button>
 

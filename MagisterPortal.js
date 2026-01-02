@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   protectPage();
   setupAuthUI();
   setupForms();
+  setupPasswordToggles();
   loadPosts();
 
   // Admin bootstrap
@@ -105,6 +106,8 @@ function setupForms() {
   contactForm && contactForm.addEventListener("submit", handleContactSubmit);
   recoveryForm && recoveryForm.addEventListener("submit", handleRecoverySubmit);
 }
+
+/*
 
 /* ===============================
    LOGIN
